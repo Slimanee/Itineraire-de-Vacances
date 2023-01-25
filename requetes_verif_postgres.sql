@@ -7,12 +7,22 @@ PlaceOfInterest : un lieu ayant un intérêt touristique (ex: un site naturel, u
 select t.*, p.* from itineraire_poi p
 join itineraire_types t on t.poi_id = p.id 
 join (select distinct poi_id from itineraire_types 
-	where type like '%EntertainmentAndEvent%' 
+	where type like '%PlaceOfInterest%' 
 	order by poi_id) liste
 	on liste.poi_id = p.id
 order by p.id, t.type
 limit 50
 
+
+select t.*, c.*, p.* from itineraire_poi p
+join itineraire_types t on t.poi_id = p.id 
+join (select distinct poi_id from itineraire_types 
+	where type like '%PlaceOfInterest%' 
+	order by poi_id) liste
+	on liste.poi_id = p.id
+left join classes_type c on t.type = c.type
+order by p.id, t.type
+limit 50
 
 select * from itineraire_poi
 where upper(nom) like '%GALOC%'
@@ -42,7 +52,7 @@ select count(distinct poi_id) from itineraire_types
 where type = 'urn:resource' ;
 -- 41099 POI >> ils sont tous urn:resource
 
--- on enleve tous les types 'schema:%', 'PointOfInterest', 'urn:resource'
+-- il faut enlever tous les types 'schema:%xxx', 'PointOfInterest', 'urn:resource'
 
 
 

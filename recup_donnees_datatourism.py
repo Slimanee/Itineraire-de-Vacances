@@ -31,8 +31,8 @@ def chargement_fichier_datatourisme():
     '''
     # définition du webservice pour récupérer le fichier datatourisme
     key = '380d2fe9-2c9c-4190-a79e-8301b37d03fb'
-    #url = 'https://diffuseur.datatourisme.fr/webservice/bfadcf44012b7156ca3e297b468c4f75/' + key
-    url = 'https://api.github.com'
+    url = 'https://diffuseur.datatourisme.fr/webservice/bfadcf44012b7156ca3e297b468c4f75/' + key
+    #url = 'https://api.github.com'
 
 
     # test existence répertoire de recupération des données, s'il n'existe pas > creation du répertoire
@@ -136,7 +136,7 @@ def chargement_data_postgres(df, df_types):
         #print(results.fetchall())
 
 
-
+#------------------------------------------------
 # définition des variables communes
 # définition chemin et nom fichier du jour à telecharger
 date_jour = datetime.today().strftime('%Y%m%d')
@@ -144,14 +144,35 @@ path="data"
 fichier="datatourism_{date_jour}.json".format(date_jour=date_jour)
 nom_fichier = path + "\\" + fichier
 
-#chargement_fichier_datatourisme()
+# recupération du fichier datatourism
+# chargement_fichier_datatourisme()
 
-df, df_types = traitement_fichier_datatourism()
+# traitement données du fichier
+# df, df_types = traitement_fichier_datatourism()
 
-print(df_types.head())
-pd.set_option('display.max_columns', 30)
-print(df.head())
+# print(df_types.head())
+# pd.set_option('display.max_columns', 30)
+# print(df.head())
 
-chargement_data_postgres(df, df_types)
+# chargement données datatourims dans postgres
+#chargement_data_postgres(df, df_types)
 
+# chargement classe_type
+df_classes_type = pd.read_csv('data\\classes_fr_origine.csv')
 
+df_classes_type = df_classes_type.replace({'URI' : '<https://www.datatourisme.fr/ontology/core#', 'ParentURI': '<https://www.datatourisme.fr/ontology/core#'}, 
+                                          {'URI': '', 'ParentURI': ''}, regex=True)
+df_classes_type = df_classes_type.replace({'URI' : '>', 'ParentURI': '>'}, 
+                                          {'URI': '', 'ParentURI': ''}, regex=True)
+df_classes_type.rename(columns={"URI": "type", "label": "label_type", "ParentURI":"parent_type", "LabelURI":"label_parent_type" }, inplace=True)
+print(df_classes_type.head(10))
+
+user = 'postgres'
+password = 'password'
+host = '127.0.0.1'
+port = '5432'
+database = 'postgres'
+engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{database}')
+
+with engine.begin() as connection:
+    df_classes_type.to_sql('classes_type', connection, if_exists='replace')
