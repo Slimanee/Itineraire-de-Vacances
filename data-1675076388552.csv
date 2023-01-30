@@ -1,51 +1,51 @@
 id,nom,latitude,longitude,type
-100431,Hôtel Auberge de la Dranse,46.255906,6.824462,Restaurant
-100449,Abbaye d'Abondance,46.281019,6.720049,ReligiousSite
-100535,Hôtel Belalp,46.263695,6.841114,Restaurant
-100538,Hôtel Le Tremplin,46.26256,6.838421,Restaurant
-100561,Hôtel La Bergerie,46.26299,6.83812,Restaurant
-100569,Hôtel Fleur de Neige,46.262211,6.840663,Restaurant
-100599,Mas Daudet. Musée & Parc,44.439173,4.316082,Museum
-100647,Hôtel Macchi,46.263977,6.839944,Restaurant
-100721,Hôtel Eliova l'Eau Vive,46.25555,6.823497,Restaurant
-100737,Hôtel Le Schuss,46.254504,6.821995,Restaurant
-100751,Musée Agricole, Industriel et Artisanal de la Vallée de la Gervanne,44.727254,5.107827,Museum
-100789,Hôtel Les Cornettes,46.295269,6.789186,Restaurant
-100796,Hôtel Le Chabi,46.294601,6.79616,Restaurant
-100813,Hôtel des Dromonts and Spa by Sowell Collection,46.189231,6.776594,Restaurant
-100879,Hôtel Alpina,46.185707,6.705086,Restaurant
-100880,Hôtel l'Ensoleillé,46.295262,6.789855,Restaurant
-100883,Eglise Saint Irénée,45.976327,5.249662,ReligiousSite
-100904,Hôtel Le Castellan,46.269717,6.839225,Restaurant
-100983,Hôtel Les Touristes,46.280478,6.719814,Restaurant
-101027,Hôtel Le Crêt,46.187303,6.69488,Restaurant
-101056,Musée des Vignerons du Forez,45.746297,4.003114,Museum
-101166,Hôtel La Chaumière,46.175327,6.707319,Restaurant
-101183,Hôtel Beauregard -The Originals Relais,45.875922,6.141851,Restaurant
-101229,Hôtel Le Tremplin,46.180218,6.70145,Restaurant
-101253,Château de Chapeau Cornu,45.628199,5.424276,Restaurant
-101369,La Mère Biquette,44.622176,4.588239,Restaurant
-101460,Hôtel Les Fleurs,46.195545,6.686246,Restaurant
-101497,Hôtel du Soleil,45.227719,6.741948,Restaurant
-101547,Hôtel Le Sporting,46.177263,6.707661,Restaurant
-101566,Hôtel La Vanoise,45.320372,6.989923,Restaurant
-101644,Château de Pizay,46.138928,4.700732,Restaurant
-101870,Grand Hôtel & Spa Uriage,45.143,5.8297,Restaurant
-101882,Hôtel Bel'Alpe,46.182368,6.6998,Restaurant
-101974,Hôtel Le Renard,46.257976,6.828625,Restaurant
-102079,Musée de la Figurine Paul Cibert,44.286534,4.931917,Museum
-102432,Hôtel*** Blanche Neige Univac | Courchevel,45.417732,6.65176,Restaurant
-102587,Musée d'Archéologie et d'Histoire de Nyons et des Baronnies,44.362305,5.141795,Museum
-102621,Les Sherpas,45.407715,6.633875,Restaurant
-102767,Hôtel Les Peupliers,45.432003,6.621835,Restaurant
-102854,Galerie Eurêka - Espace Montagne,45.564016,5.924487,Museum
-102909,Hôtel Port et Lac,45.814749,6.209048,Restaurant
-102975,Hôtel Au Gay Séjour,45.723079,6.308341,Restaurant
-103120,Hôtel Florimont,45.759529,6.316538,Restaurant
-103323,Hôtel Allodis & Spa des Neiges by Clarins,45.392963,6.575507,Restaurant
-103483,Hôtel le Grand Coeur & Spa,45.397321,6.567807,Restaurant
-103536,Hôtel le Mottaret,45.373665,6.577854,Restaurant
-103540,Hôtel le Savoy,45.396831,6.566061,Restaurant
-103586,Portetta,45.417537,6.65396,Restaurant
-103613,Hôtel des Bergeronnettes,45.620521,5.670619,Restaurant
-103996,La Ferme du Chozal,45.749998,6.579695,Restaurant
+"100431","Hôtel Auberge de la Dranse","46.255906","6.824462","Restaurant"
+"100449","Abbaye d'Abondance","46.281019","6.720049","ReligiousSite"
+"100535","Hôtel Belalp","46.263695","6.841114","Restaurant"
+"100538","Hôtel Le Tremplin","46.26256","6.838421","Restaurant"
+"100561","Hôtel La Bergerie","46.26299","6.83812","Restaurant"
+"100569","Hôtel Fleur de Neige","46.262211","6.840663","Restaurant"
+"100599","Mas Daudet. Musée & Parc","44.439173","4.316082","Museum"
+"100647","Hôtel Macchi","46.263977","6.839944","Restaurant"
+"100721","Hôtel Eliova l'Eau Vive","46.25555","6.823497","Restaurant"
+"100737","Hôtel Le Schuss","46.254504","6.821995","Restaurant"
+"100751","Musée Agricole, Industriel et Artisanal de la Vallée de la Gervanne","44.727254","5.107827","Museum"
+"100789","Hôtel Les Cornettes","46.295269","6.789186","Restaurant"
+"100796","Hôtel Le Chabi","46.294601","6.79616","Restaurant"
+"100813","Hôtel des Dromonts and Spa by Sowell Collection","46.189231","6.776594","Restaurant"
+"100879","Hôtel Alpina","46.185707","6.705086","Restaurant"
+"100880","Hôtel l'Ensoleillé","46.295262","6.789855","Restaurant"
+"100883","Eglise Saint Irénée","45.976327","5.249662","ReligiousSite"
+"100904","Hôtel Le Castellan","46.269717","6.839225","Restaurant"
+"100983","Hôtel Les Touristes","46.280478","6.719814","Restaurant"
+"101027","Hôtel Le Crêt","46.187303","6.69488","Restaurant"
+"101056","Musée des Vignerons du Forez","45.746297","4.003114","Museum"
+"101166","Hôtel La Chaumière","46.175327","6.707319","Restaurant"
+"101183","Hôtel Beauregard -The Originals Relais","45.875922","6.141851","Restaurant"
+"101229","Hôtel Le Tremplin","46.180218","6.70145","Restaurant"
+"101253","Château de Chapeau Cornu","45.628199","5.424276","Restaurant"
+"101369","La Mère Biquette","44.622176","4.588239","Restaurant"
+"101460","Hôtel Les Fleurs","46.195545","6.686246","Restaurant"
+"101497","Hôtel du Soleil","45.227719","6.741948","Restaurant"
+"101547","Hôtel Le Sporting","46.177263","6.707661","Restaurant"
+"101566","Hôtel La Vanoise","45.320372","6.989923","Restaurant"
+"101644","Château de Pizay","46.138928","4.700732","Restaurant"
+"101870","Grand Hôtel & Spa Uriage","45.143","5.8297","Restaurant"
+"101882","Hôtel Bel'Alpe","46.182368","6.6998","Restaurant"
+"101974","Hôtel Le Renard","46.257976","6.828625","Restaurant"
+"102079","Musée de la Figurine Paul Cibert","44.286534","4.931917","Museum"
+"102432","Hôtel*** Blanche Neige Univac | Courchevel","45.417732","6.65176","Restaurant"
+"102587","Musée d'Archéologie et d'Histoire de Nyons et des Baronnies","44.362305","5.141795","Museum"
+"102621","Les Sherpas","45.407715","6.633875","Restaurant"
+"102767","Hôtel Les Peupliers","45.432003","6.621835","Restaurant"
+"102854","Galerie Eurêka - Espace Montagne","45.564016","5.924487","Museum"
+"102909","Hôtel Port et Lac","45.814749","6.209048","Restaurant"
+"102975","Hôtel Au Gay Séjour","45.723079","6.308341","Restaurant"
+"103120","Hôtel Florimont","45.759529","6.316538","Restaurant"
+"103323","Hôtel Allodis & Spa des Neiges by Clarins","45.392963","6.575507","Restaurant"
+"103483","Hôtel le Grand Coeur & Spa","45.397321","6.567807","Restaurant"
+"103536","Hôtel le Mottaret","45.373665","6.577854","Restaurant"
+"103540","Hôtel le Savoy","45.396831","6.566061","Restaurant"
+"103586","Portetta","45.417537","6.65396","Restaurant"
+"103613","Hôtel des Bergeronnettes","45.620521","5.670619","Restaurant"
+"103996","La Ferme du Chozal","45.749998","6.579695","Restaurant"
