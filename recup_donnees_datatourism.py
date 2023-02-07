@@ -11,6 +11,7 @@ import requests
 import json
 import os
 import pandas as pd
+import re
 # librairie à priori nécessaire pour se connecter à postgres
 import psycopg2
 from sqlalchemy import create_engine
@@ -97,6 +98,14 @@ def traitement_fichier_datatourism():
     df = df[columns.keys()]  # Keep only useful columns
     df = df.rename(columns=columns)
     df = df.dropna(subset=['id', 'nom', 'longitude', 'latitude', 'latlon'])  # Suppress row without mandatory data
+
+    # Conversion columns
+    convert_dict = {'latitude': float,
+                    'longitude': float
+                    }
+    df = df.astype(convert_dict)
+
+
     df = df.set_index('id', verify_integrity=True)  # Ensure column id contains only unique values
     df.insert(len(df.columns), 'updated_at', pd.Timestamp.utcnow())  # Add datetime column to know when data were refreshed
 
@@ -135,6 +144,37 @@ def chargement_data_postgres(df, df_types):
         #results = connection.execute("SELECT * FROM TEST;")
         #print(results.fetchall())
 
+'''
+def removesuffix(input_string, suffix):
+    if suffix and input_string.endswith(suffix):
+        return input_string[:-len(suffix)]
+    return input_string
+
+def removeprefix(input_string, prefix):
+    if prefix and input_string.startswith(prefix):
+        return input_string[len(prefix):]
+    return input_string
+
+
+def get_parent(label, level=0):
+    level += 1
+    df_classes.loc[df_classes['ParentURI'] == label, 'level'] = level
+    for child_label in df_classes.loc[df_classes['ParentURI'] == label, 'index']:
+        get_parent(child_label, level)
+'''
+
+def keep_type(text):
+    match = re.search('<https://www.datatourisme.fr/ontology/core#(.+?)>', text)
+    if match:
+        return match.group(1)
+    return text
+
+def get_parent(label, level=0):
+    level += 1
+    df_classes.loc[df_classes['ParentURI'] == label, 'level'] = level
+    for child_label in df_classes.loc[df_classes['ParentURI'] == label, 'URI']:
+        get_parent(child_label, level)
+
 
 #------------------------------------------------
 # définition des variables communes
@@ -144,19 +184,34 @@ path="data"
 fichier="datatourism_{date_jour}.json".format(date_jour=date_jour)
 nom_fichier = path + "\\" + fichier
 
+
+
+'''
+-------------------------------------------------------------------
+1ere Partie Chargement du fichier Datatourism / point d'interet
+-------------------------------------------------------------------
+'''
 # recupération du fichier datatourism
-# chargement_fichier_datatourisme()
+chargement_fichier_datatourisme()
 
 # traitement données du fichier
-# df, df_types = traitement_fichier_datatourism()
+df, df_types = traitement_fichier_datatourism()
 
 # print(df_types.head())
 # pd.set_option('display.max_columns', 30)
 # print(df.head())
 
 # chargement données datatourims dans postgres
-#chargement_data_postgres(df, df_types)
+chargement_data_postgres(df, df_types)
 
+
+'''
+-------------------------------------------------------------------
+2nd Partie Chargement des classements des types
+-------------------------------------------------------------------
+'''
+
+''' 1er méthode traitement des classements des types
 # chargement classe_type
 df_classes_type = pd.read_csv('data\\classes_fr_origine.csv')
 
@@ -167,6 +222,25 @@ df_classes_type = df_classes_type.replace({'URI' : '>', 'ParentURI': '>'},
 df_classes_type.rename(columns={"URI": "type", "label": "label_type", "ParentURI":"parent_type", "LabelURI":"label_parent_type" }, inplace=True)
 print(df_classes_type.head(10))
 
+'''
+
+
+'''
+A remettre
+
+# 2nde méthode traitement des classements des types
+urlclasses = "https://gitlab.adullact.net/adntourisme/datatourisme/ontology/-/raw/master/Documentation/classes_fr.csv"
+df_classes = pd.read_csv(urlclasses)  # index, URI\tLabel, ParentURI, LabelURI
+#df_classes = df_classes.reset_index()
+#df_classes = df_classes.applymap(lambda x: removeprefix(removesuffix(x, '>'), '<https://www.datatourisme.fr/ontology/core#')) 
+
+df_classes = df_classes.applymap(keep_type)
+
+get_parent("PointOfInterest")
+df_classes.rename(columns={"URI": "type", "Label": "label_type", "ParentURI":"parent_type", "ParentLabel":"label_parent_type" }, inplace=True)
+print(df_classes.head())
+
+
 user = 'postgres'
 password = 'password'
 host = '127.0.0.1'
@@ -175,4 +249,6 @@ database = 'postgres'
 engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{database}')
 
 with engine.begin() as connection:
-    df_classes_type.to_sql('classes_type', connection, if_exists='replace')
+    df_classes.to_sql('classes_types', connection, if_exists='replace')
+
+'''
