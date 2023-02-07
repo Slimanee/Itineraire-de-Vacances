@@ -30,6 +30,8 @@ df = df[columns.keys()]  # Keep only useful columns
 df = df.rename(columns=columns)
 df = df.applymap(lambda x: ', '.join(x) if isinstance(x, list) else x)  # Transform lists into strings
 
+print(df.head())
+
 categories = {
     'WalkingTour': 'Itinéraire pédestre',
     'CyclingTour': 'Itinéraire cyclable',
@@ -59,6 +61,7 @@ convert_dict = {'latitude': float,
 df = df.astype(convert_dict)
 
 df = df.set_index('id', verify_integrity=True)  # Ensure column id contains unique values
+
 
 with create_engine(DATABASE_URL).begin() as connection:
     df.to_sql('poi', connection, if_exists='replace')  # Load dataframe in postgresql
