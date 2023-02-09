@@ -1,0 +1,65 @@
+// suppression des données
+MATCH (n)
+DETACH DELETE n;
+
+// id : id du poi
+// nom : nom du poi
+// latitude : 
+// longitude : 
+// type : du POI
+
+
+// Chargement des stations / chargement des coordonnées au format point srid:7203
+LOAD CSV WITH HEADERS FROM 'C:\travail\Itineraire-de-Vacances\data-1675076388552.csv' AS row
+CREATE (:pointid {id: toInteger(row.id), 
+                    nom:row.nom, 
+					coordonnees: point({x: toFloat(row.latitude), y: toFloat(row.longitude)}),
+                    type: row.type
+});
+
+
+
+
+
+// exemple de l'éval test NEO4J
+
+// Chargement des stations / chargement des coordonnées au format point srid:7203
+LOAD CSV WITH HEADERS FROM 'https://github.com/pauldechorgnat/cool-datasets/raw/master/ratp/stations.csv' AS row
+CREATE (:stations {id_gare: row.nom_clean, 
+                    nom_gare:row.nom_gare, 
+					coordonnees: point({x: toFloat(row.x), y: toFloat(row.y)}),
+                    trafic: toInteger(row.Trafic), 
+                    ville: row.Ville, 
+                    ligne: row.ligne
+});
+
+
+
+// creation des liens CORRESPONDANCE sur les stations ayant plusieurs lignes
+MATCH (s1:stations)
+MATCH (s2:stations)
+WHERE s1.id_gare = s2.id_gare AND s1.ligne <> s2.ligne
+CREATE (s1)-[:CORRESPONDANCE]->(s2);
+
+// start : station de début de la liaison
+// stop : station de fin de la liaison
+// ligne : ligne de la liaison
+
+// creation des liens LIAISON entre stations 
+LOAD CSV WITH HEADERS FROM 'https://github.com/pauldechorgnat/cool-datasets/raw/master/ratp/liaisons.csv' AS row
+MATCH (sdepart:stations) WHERE sdepart.id_gare = row.start and sdepart.ligne=row.ligne
+MATCH (sarrivee:stations) WHERE sarrivee.id_gare = row.stop and sarrivee.ligne=row.ligne
+CREATE (sdepart)-[:LIAISON]->(sarrivee);
+
+// creation des liens DEPLACEMENT_PIED entre stations < 1km
+MATCH (s1:stations)
+MATCH (s2:stations)
+WHERE s1.id_gare <> s2.id_gare AND distance(s1.coordonnees, s2.coordonnees) < 1000
+CREATE (s1)-[:DEPLACEMENT_PIED]->(s2)
+
+// Requete pour vérifier
+//MATCH (s1:stations)
+//MATCH (s2:stations)
+//MATCH (s1)-[:DEPLACEMENT_PIED]->(s2)
+//RETURN s1,s2
+
